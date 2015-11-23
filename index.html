@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="index.css" rel="stylesheet" type="text/css" />
+    <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="bootstrap-3.3.5-dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+    <script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <meta charset="utf-8" />
+    <title>Achtung Die Kurve</title>
+</head>
+<body style="background-color: #404040">
+    <div id="start-page" class="col-md-8">
+        <!--Introduction-->
+        <h3 class="page-header">Introduction</h3>
+        <p>
+            The goal of the game is to survive as long as possible. You and your friends share the keyboard to control the line.
+            The lines are constantly moving forward. The players can only adjust the direction of the line.
+        </p>
+        <p>
+            A player loses if his line touches a line or the border of the game. He then has to wait for the start of the next round to play again. For every player you survive you get a point.
+        </p>
+        <p>
+            <strong>Achtung die Kurve is played on a single screen, so make sure you have some friends around!</strong>
+        </p>
+        <h3 class="page-header">Getting Started</h3>
+        <p>
+            In order to play you have to add atleast two players. To do so you type in the players name in the input field on the right hand side and choose a pair of keys to control the line. Then click on the "Add Player" button and the new player is listed in the player list. The color helps you to identify your line in the game.
+        </p>
+        <p>
+            Once you have added two players you get the "Start Game" button, located above the list of players. Press it. A new game starts. Enjoy.
+        </p>
+    </div>
+    <div id="game-page" class="col-md-8">
+        <canvas></canvas>
+    </div>
+    <aside id="player-panel" class="col-md-4">
+        <p>Enter Players name: </p>
+        <input class="form-control" type="text" id="player-name" />
+        <br />
+        <button class="btn btn-default" onclick="AddPlayer();" id="add-player">Add Player</button>
+        <!--PlayerList-->
+        <h3>PlayerList</h3>
+        <!--list contains player name and color-->
+        <ul id="player-list"></ul>
+    </aside>
+    <script src="js/index.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

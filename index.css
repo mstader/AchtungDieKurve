@@ -1,0 +1,15 @@
+﻿body, aside {
+    color: #ffffff;
+}
+aside > button {
+    color: #404040;
+}
+body > div {
+    color: #ffffff;
+}
+
+#start-page {
+    width: 600px;
+    height: 400px;
+    display: block;
+}
