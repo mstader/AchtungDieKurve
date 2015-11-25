@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <title>Achtung Die Kurve</title>
 </head>
-<body style="background-color: #404040">
+<body style="background-color: #404040" onload="hideTableIfEmpty()">
     <div id="start-page" class="col-md-8">
         <!--Introduction-->
         <h3 class="page-header">Introduction</h3>
@@ -38,13 +38,18 @@
         <input class="form-control" type="text" id="player-name" />
         <br />
         <button class="btn btn-default" onclick="AddPlayer()" id="add-player">Add Player</button>
-        <!--PlayerList-->
-        <h3>PlayerList</h3>
-        <!--list contains player name and color-->
-        <ul id="player-list"></ul>
+        <!--PlayerLTable-->
+        <table id="player-table" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Player-List</th>
+                </tr>
+            </thead>
+            <tbody id="TableBody"></tbody>
+        </table>
     </aside>
     <script src="js/index.js"></script>
-    <script src="js/game.js"></script>
+    <script  src="js/game.js"></script>
     <!--hello changes-->
 </body>
 </html>
