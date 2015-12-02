@@ -5,8 +5,10 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B148178C-D1D9-469A-8594-ED019FD2E16E}"
 	ProjectSection(SolutionItems) = preProject
+		AchtungDieKurve.zip = AchtungDieKurve.zip
 		index.css = index.css
 		index.html = index.html
+		Lastenblatt.docx = Lastenblatt.docx
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{1F9E02D7-6BE6-478D-9822-8FC780585135}"
