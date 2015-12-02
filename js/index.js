@@ -97,3 +97,15 @@ function deleteElem(index) {
     players = playersNew;
     displayData();
 }
+
+function changePage() {
+    var startPage = document.getElementById("start-page");
+    var gamePage = document.getElementById("game-page");
+    if (startPage.style.display == "none") {
+        startPage.style.display = "block";
+        gamePage.style.display = "none";
+    } else {
+        startPage.style.display = "none";
+        gamePage.style.display = "block";
+    }
+}

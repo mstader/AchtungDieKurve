@@ -1,6 +1,10 @@
 ﻿body, aside {
     color: #ffffff;
 }
+
+aside {
+    margin-top: 50px;
+}
 aside > button {
     color: #404040;
 }
