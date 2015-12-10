@@ -102,6 +102,7 @@ function deleteElem(index) {
 function changePage() {
     var startPage = document.getElementById("start-page");
     var gamePage = document.getElementById("game-page");
+    //changePage
     if (startPage.style.display == "none") {
         startPage.style.display = "block";
         gamePage.style.display = "none";
