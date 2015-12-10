@@ -1,3 +1,4 @@
+var maxPlayerNumber = 5;
 var inputField = document.getElementById("player-name");
 inputField.addEventListener("keydown", checkInputField);
 var color = ["Red", "YellowGreen", "Blue", "Green", "Pink", "Orange", "Cyan", "BlueViolet"];
@@ -20,7 +21,7 @@ function getColor() {
 }
 
 function checkInputField(event) {
-    if (event.keyCode == 13 && players.length <= 7) {
+    if (event.keyCode == 13 && players.length < maxPlayerNumber) {
         AddPlayer();
     }
 }
@@ -38,12 +39,12 @@ function contains(playerName) {
 
 function AddPlayer() {
     if (inputField.value != "" && !contains(inputField.value)) {
-        var player = { name: "", color: "" };
+        var player = { name: "", color: "", keyLeft: '', keyRight: '', finished: false };
         player.name = inputField.value;
         players.push(player);
         players[players.length - 1].color = getColor();
         inputField.value = "";
-        if (players.length > 7) {
+        if (players.length > maxPlayerNumber - 1) {
             document.getElementById("add-player").disabled = true;
         }
         displayData();
