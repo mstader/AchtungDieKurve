@@ -1,5 +1,22 @@
 //In this Index.js are all settings that have to be made before the game can start.
+var dev = true;
+if (dev) {
+    var playersButton = document.getElementById("insert-players");
+    playersButton.style.display = "block";
+}
+function insertTestPlayers() {
 
+    var player;
+    for (i = 0; i < 3; i++) {
+        player = { name: ("number" + (i + 1)), color: "", keyLeft: 0, keyRight: 0, finished: false };
+        player.color = getColor();
+        player.keyLeft = (49 + 2*i);
+        player.keyRight = (50 + 2*i);
+        players.push(player);
+        console.log(player);
+    }
+    displayData();
+}
 var maxPlayerNumber = 5;//not more than 5 players are allowed to attend the game. 
 var inputField = document.getElementById("player-name");//players enter their names here
 var getKeyLeft = document.getElementById("left-key");//player enters the left-key, for controlling the game
@@ -36,8 +53,16 @@ function checkInputField(event) {
 }
 
 //FUNCTION that checks the key-code, to make sure the entered key-code is ok for playing
-function checkKeyCode(event){
-
+function checkKeyCode(event) {
+    var activatedField;
+    if (event.currentTarget.id == "left-key") {
+        activatedField = getKeyLeft;
+    } else {
+        activatedField = getKeyRight;
+    }
+    activatedField.hidden = true;
+    activatedField.parentElement.innerHTML += String.fromCharCode(event.keyCode);
+    console.log(event.keyCode);
 }
 
 
@@ -56,7 +81,7 @@ function contains(playerName) {
 //This function adds a player to the playerlist, assignes a color to the player --> TO-DO: add the keys for left and right!!!
 function AddPlayer() {
     if (inputField.value != "" && !contains(inputField.value)) {
-        var player = { name: "", color: "", keyLeft: '', keyRight: '', finished: false };
+        var player = { name: "", color: "", keyLeft: 0, keyRight: 0, finished: false };
         player.name = inputField.value;
         players.push(player);
         players[players.length - 1].color = getColor();

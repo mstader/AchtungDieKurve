@@ -4,16 +4,37 @@
 
 aside {
     margin-top: 50px;
+    border: solid;
+    border-color: #ffffff;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 15px;
 }
-aside > button {
-    color: #404040;
-}
+
+    aside > button {
+        color: #404040;
+    }
+
 body > div {
     color: #ffffff;
 }
 
 #start-page {
     width: 600px;
-    height: 400px;
+    height: 450px;
     display: block;
+}
+
+#game-page {
+}
+
+#game-field {
+    border: solid;
+    border-color: #ffffff;
+    border-radius: 8px;
+}
+
+#heading {
+    color: #ffffff;
+    margin-left: 15px;
 }
