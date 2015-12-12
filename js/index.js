@@ -8,12 +8,11 @@ function insertTestPlayers() {
 
     var player;
     for (i = 0; i < 3; i++) {
-        player = { name: ("number" + (i + 1)), color: "", keyLeft: 0, keyRight: 0, finished: false };
+        player = { name: ("number" + (i + 1)), color: "", keyLeft: 0, keyRight: 0, finished: false, lastX: 100, lastY: 100, angle: 0};
         player.color = getColor();
-        player.keyLeft = (49 + 2*i);
-        player.keyRight = (50 + 2*i);
+        player.keyLeft = (49 + 2 * i);
+        player.keyRight = (50 + 2 * i);
         players.push(player);
-        console.log(player);
     }
     displayData();
 }
@@ -52,6 +51,7 @@ function checkInputField(event) {
     }
 }
 
+//TODO: set key, where it is able to get from js
 //FUNCTION that checks the key-code, to make sure the entered key-code is ok for playing
 function checkKeyCode(event) {
     var activatedField;
@@ -62,9 +62,7 @@ function checkKeyCode(event) {
     }
     activatedField.hidden = true;
     activatedField.parentElement.innerHTML += String.fromCharCode(event.keyCode);
-    console.log(event.keyCode);
 }
-
 
 //This function checks if there is already a player with the same name in the playerlist
 function contains(playerName) {
@@ -78,10 +76,14 @@ function contains(playerName) {
     return contains;
 }
 
+//TODO: add keys to player
 //This function adds a player to the playerlist, assignes a color to the player --> TO-DO: add the keys for left and right!!!
 function AddPlayer() {
     if (inputField.value != "" && !contains(inputField.value)) {
-        var player = { name: "", color: "", keyLeft: 0, keyRight: 0, finished: false };
+        var player = {
+            name: "", color: "", keyLeft: 0, keyRight: 0, finished: false, lastX: Math.round((700 * Math.random) + 100),
+            lastY: Math.round((300 * Math.random) + 100), angle: 0
+        };
         player.name = inputField.value;
         players.push(player);
         players[players.length - 1].color = getColor();
