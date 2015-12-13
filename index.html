@@ -41,11 +41,11 @@
         <!--enter the left and rigth controler-->
         <span>
             Enter left-key: <input class="input" type="text" id="left-key" style="width: 10%" />
-            <span></span>
+            <span id="left-key-value"></span>
         </span>
         <span>
             Enter right-key: <input class="input" type="text" id="right-key" style="width: 10%" />
-            <span></span>
+            <span id="right-key-value"></span>
         </span>
         &nbsp;
         <button class="btn btn-default" onclick="AddPlayer()" id="add-player">Add Player</button><br /><br />
@@ -56,6 +56,8 @@
             <thead>
                 <tr>
                     <th>Player-List</th>
+                    <th>Left / Right</th>
+                    <th>Score</th>
                 </tr>
             </thead>
             <tbody id="TableBody"></tbody>
