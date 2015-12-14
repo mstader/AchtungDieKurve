@@ -9,11 +9,28 @@ var game = {
     speed: 100,
     canvas: null,
     context: null,
-    counter: 0,
+    holeSize: 20,
     mximumChangeOfAngle: 10,
-    startGame() {
+    disableButton() {
+        var btn = document.getElementById("start-game");
+        btn.style.display = "none";
+        btn = document.getElementById("start-game-2");
+        btn.style.display = "inline";
+        if (game.playing) {
+            btn.disabled = true;
+        } else {
+            btn.disabled = false;
+        }
+    },
+    startGameIntr() {
+        console.log("game_intr");
         document.addEventListener("keydown", game.changeDirection);
         changePage();
+        game.playing = true;
+        game.startAnimation();
+    },
+    startGame() {
+        console.log("game_start");
         game.playing = true;
         game.startAnimation();
     },
@@ -31,17 +48,6 @@ var game = {
                 }
             }
         }
-    },
-    checkFinished() {
-        var counter = 0;
-        for (i = 0; i < players.length; i++) {
-            if (!entry.finished) {
-                counter++;
-                if (counter >= 2)
-                    return false;
-            }
-        };
-        return true;
     },
     hit(player, newX, newY) {
         var nextPosX = (player.lastX + newX) * 100 / 100;
@@ -62,6 +68,7 @@ var game = {
         var background = game.context.getImageData(1, 1, 1, 1);
         for (i = 0; i <= imageData.data.length; i++) {
             if (background.data[i] != imageData.data[i]) {
+                console.log(player, newX, newY);
                 return true;
             }
         };
@@ -69,22 +76,25 @@ var game = {
     },
     drawRectangleAnimation(context) {
         players.forEach(function (player) {
-            context.beginPath();
-            context.arc(player.lastX, player.lastY, game.height, 0, 2 * Math.PI);
-            context.fillStyle = player.color;
-            context.fill();
-            context.lineWidth = game.borderWidth;
-            context.strokeStyle = player.color;
-            context.stroke();
+            player.holeCounter--;
+            if (player.holeCounter > 0) {
+                context.beginPath();
+                context.arc(player.lastX, player.lastY, game.height, 0, 2 * Math.PI);
+                context.fillStyle = player.color;
+                context.fill();
+                context.lineWidth = game.borderWidth;
+                context.strokeStyle = player.color;
+                context.stroke();
+            } else if (player.holeCounter == -game.holeSize) {
+                player.holeCounter = Math.round(Math.random() * 400 + 100);
+            }
         });
     },
-    animate(canvas, context, startTime) {
-        var time = (new Date()).getTime() - startTime;
-        startTime = (new Date()).getTime();
-
+    animate(canvas, context) {
         var newX;
         var newY;
         var counter = 0;
+        console.log("animate start");
         players.forEach(function (player) {
             if (!player.finished) {
                 if (player.turnLeft) {
@@ -108,14 +118,16 @@ var game = {
                 }
             }
         });
+        console.log("animate middle");
         if (counter >= 2) {
             game.drawRectangleAnimation(context);
             // request new frame
             requestAnimFrame(function () {
-                game.animate(canvas, context, startTime);
+                game.animate(canvas, context);
             });
         } else {
             game.playing = false;
+            game.disableButton();
             var scoreAdd = 0;
             players.forEach(function (player) {
                 if (!contains(player.name, finishedList))
@@ -123,6 +135,10 @@ var game = {
             });
             finishedList.forEach(function (player) {
                 player.score += scoreAdd;
+                player.finished = false;
+                player.lastX = Math.round((500 * Math.random()) + 100);
+                player.lastY = Math.round((200 * Math.random()) + 100);
+                player.angle = Math.round((360 * Math.random()));
                 scoreAdd++;
             });
             displayData();
@@ -131,6 +147,7 @@ var game = {
         }
     },
     startAnimation() {
+        game.disableButton();
         game.canvas = document.getElementById('game-field');
         game.context = game.canvas.getContext('2d');
         game.context.clearRect(0, 0, game.canvas.width, game.canvas.height);
@@ -148,11 +165,10 @@ var game = {
             };
         })();
         game.drawRectangleAnimation(game.context);
-
+        console.log("start animation");
         // wait one second before starting animation
         setTimeout(function () {
-            var startTime = (new Date()).getTime();
-            game.animate(game.canvas, game.context, startTime);
+            game.animate(game.canvas, game.context);
         }, 1000);
     }
 }

@@ -1,5 +1,5 @@
 //In this Index.js are all settings that have to be made before the game can start.
-var dev = true;
+var dev = false;
 if (dev) {
     var playersButton = document.getElementById("insert-players");
     playersButton.style.display = "block";
@@ -57,7 +57,6 @@ function checkInputField(event) {
     }
 }
 
-//TODO: set key, where it is able to get from js
 //FUNCTION that checks the key-code, to make sure the entered key-code is ok for playing
 function checkKeyCode(event) {
     var htmlObject;
@@ -65,12 +64,18 @@ function checkKeyCode(event) {
         htmlObject = getKeyLeft;
         htmlObject.hidden = true;
         htmlObject = document.getElementById("left-key-value");
-        htmlObject.innerHTML += String.fromCharCode(event.keyCode);
+        if (event.keyCode <= 32)
+            AddPlayer();
+        else
+            htmlObject.innerHTML = String.fromCharCode(event.keyCode);
     } else {
         htmlObject = getKeyRight;
         htmlObject.hidden = true;
         htmlObject = document.getElementById("right-key-value");
-        htmlObject.innerHTML += String.fromCharCode(event.keyCode);
+        if (event.keyCode <= 32)
+            AddPlayer();
+        else
+            htmlObject.innerHTML = String.fromCharCode(event.keyCode);
     }
 }
 
@@ -86,7 +91,6 @@ function contains(playerName, playerList) {
     return contains;
 }
 
-//TODO: add keys to player
 //This function adds a player to the playerlist, assignes a color to the player --> TO-DO: add the keys for left and right!!!
 function AddPlayer() {
     var controls = true;
@@ -98,13 +102,17 @@ function AddPlayer() {
         controls = false;
     if (inputField.value != "" && !contains(inputField.value, players) && controls) {
         var player = {
-            name: "", color: "", keyLeft: 0, keyRight: 0, finished: false, lastX: Math.round((700 * Math.random) + 100),
-            lastY: Math.round((300 * Math.random) + 100), angle: 0, turnLeft: false, turnRight: false, score: 0
+            name: "", color: "", keyLeft: 0, keyRight: 0, finished: false, lastX: 0,
+            lastY: 0, angle: 0, turnLeft: false, turnRight: false, score: 0, holeCounter: 0
         };
         player.name = inputField.value;
-        player.keyRight = control.innerHTML;
+        player.keyRight = control.innerHTML.charCodeAt(0);
         control = document.getElementById("left-key-value");
-        player.keyLeft = control.innerHTML;
+        player.keyLeft = control.innerHTML.charCodeAt(0);
+        player.lastX = Math.round((500 * Math.random()) + 100);
+        player.lastY = Math.round((200 * Math.random()) + 100);
+        player.angle = Math.round((360 * Math.random()));
+        player.holeCounter = Math.round(Math.random() * 400 + 100);
         players.push(player);
         players[players.length - 1].color = getColor();
         resetForm();
