@@ -74,10 +74,10 @@ function checkKeyCode(event) {
     }
 }
 
-//This function checks if there is already a player with the same name in the playerlist
-function contains(playerName) {
+//This function checks if there is already a player with the same name in the playerList passed as argument
+function contains(playerName, playerList) {
     var contains = false;
-    players.forEach(function (entry) {
+    playerList.forEach(function (entry) {
         if (entry.name == playerName) {
             contains = true;
             return;
@@ -96,7 +96,7 @@ function AddPlayer() {
     control = document.getElementById("right-key-value");
     if (control.innerHTML == "")
         controls = false;
-    if (inputField.value != "" && !contains(inputField.value) && controls) {
+    if (inputField.value != "" && !contains(inputField.value, players) && controls) {
         var player = {
             name: "", color: "", keyLeft: 0, keyRight: 0, finished: false, lastX: Math.round((700 * Math.random) + 100),
             lastY: Math.round((300 * Math.random) + 100), angle: 0, turnLeft: false, turnRight: false, score: 0
