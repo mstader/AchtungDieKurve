@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		index.css = index.css
 		index.html = index.html
 		Lastenblatt.docx = Lastenblatt.docx
+		Programmbeschreibung.pdf = Programmbeschreibung.pdf
+		Zeitentabelle.docx = Zeitentabelle.docx
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{1F9E02D7-6BE6-478D-9822-8FC780585135}"
