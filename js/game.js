@@ -1,6 +1,8 @@
+//In this game.js are all functions that make the game run.
+
 var players = [];
 var finishedList = [];
-var game = {
+var game = {//settings for game
     playing: false,
     ctx: null,
     borderWidth: 1,
@@ -11,7 +13,7 @@ var game = {
     context: null,
     holeSize: 20,
     mximumChangeOfAngle: 10,
-    disableButton() {
+    disableButton() {//"Start-Game"-Button
         var btn = document.getElementById("start-game");
         btn.style.display = "none";
         btn = document.getElementById("start-game-2");
@@ -22,19 +24,19 @@ var game = {
             btn.disabled = false;
         }
     },
-    startGameIntr() {
+    startGameIntr() {//(event)listens for a control-key down, to initializes a direction change
         console.log("game_intr");
         document.addEventListener("keydown", game.changeDirection);
         changePage();
         game.playing = true;
         game.startAnimation();
     },
-    startGame() {
+    startGame() {//starts the game: calles the animation function, which initializes the moving process of the line
         console.log("game_start");
         game.playing = true;
         game.startAnimation();
     },
-    changeDirection(event) {
+    changeDirection(event) {//makes the line changes the direction, left or right depends on the set key-code
         if (game.playing) {
             var player;
             for (i = 0; i < players.length; i++) {
@@ -49,7 +51,7 @@ var game = {
             }
         }
     },
-    hit(player, newX, newY) {
+    hit(player, newX, newY) {//Step-by-step moving process of the line
         var nextPosX = (player.lastX + newX) * 100 / 100;
         var nextPosY = (player.lastY + newY) * 100 / 100;
         if (newX < 0)
@@ -74,7 +76,7 @@ var game = {
         };
         return false;
     },
-    drawRectangleAnimation(context) {
+    drawRectangleAnimation(context) {//draws rectangel in the given player-color
         players.forEach(function (player) {
             player.holeCounter--;
             if (player.holeCounter > 0) {
@@ -90,7 +92,7 @@ var game = {
             }
         });
     },
-    animate(canvas, context) {
+    animate(canvas, context) {//Moving process of the line: also angle the line does. Speed is defined
         var newX;
         var newY;
         var counter = 0;
@@ -146,7 +148,7 @@ var game = {
             //TODO:reset last player positions
         }
     },
-    startAnimation() {
+    startAnimation() {//Starts the whole animation! (sets the canvas before the first rectangle can be drawn) 
         game.disableButton();
         game.canvas = document.getElementById('game-field');
         game.context = game.canvas.getContext('2d');
@@ -164,7 +166,7 @@ var game = {
                 window.setTimeout(callback, 1000 / 60);
             };
         })();
-        game.drawRectangleAnimation(game.context);
+        game.drawRectangleAnimation(game.context);//draws rectangle in the player-color on the canvas
         console.log("start animation");
         // wait one second before starting animation
         setTimeout(function () {

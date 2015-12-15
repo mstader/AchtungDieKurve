@@ -3,12 +3,13 @@
 }
 
 aside {
-    margin-top: 50px;
     border: solid;
     border-color: #ffffff;
     border-radius: 8px;
     padding: 10px;
-    margin: 15px;
+	margin:15px; 
+	margin-left:7%;
+
 }
 
     aside > button {

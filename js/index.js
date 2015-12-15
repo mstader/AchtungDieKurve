@@ -1,11 +1,14 @@
 //In this Index.js are all settings that have to be made before the game can start.
+
+//Button for the insertTestPlayers function
 var dev = false;
 if (dev) {
     var playersButton = document.getElementById("insert-players");
     playersButton.style.display = "block";
 }
-function insertTestPlayers() {
 
+//function for testing, inserts players into the playertable, so that there 
+function insertTestPlayers() {
     var player;
     for (i = 0; i < 3; i++) {
         player = {
@@ -28,7 +31,7 @@ function insertTestPlayers() {
     inputField.addEventListener("keydown", checkInputField);//EventListener added, to know if the inputField is empty or has some value
     getKeyLeft.addEventListener("keydown", checkKeyCode);//EventListener added, to check if the entered keycode is correct
     getKeyRight.addEventListener("keydown", checkKeyCode);//EventListener added, to check if the entered keycode is correct
-    var color = ["Red", "YellowGreen", "Blue", "Green", "Pink", "Orange", "Cyan", "BlueViolet"];//predefined colors, for the players
+    var color = ["Red", "Blue", "Orange", "YellowGreen", "Pink", "Cyan", "Green", "BlueViolet"];//predefined colors, for the players
     var takenColor = [false, false, false, false, false, false, false, false];// when color is taken, value turns into true
 }
 
@@ -79,7 +82,7 @@ function checkKeyCode(event) {
     }
 }
 
-//This function checks if there is already a player with the same name in the playerList passed as argument
+//This function checks if there is already a player with the same name in the playerlist passed as argument
 function contains(playerName, playerList) {
     var contains = false;
     playerList.forEach(function (entry) {
@@ -91,7 +94,7 @@ function contains(playerName, playerList) {
     return contains;
 }
 
-//This function adds a player to the playerlist, assignes a color to the player --> TO-DO: add the keys for left and right!!!
+//This function adds a player to the playerlist, assignes a color to the player and the keys left and right to controle the line.
 function AddPlayer() {
     var controls = true;
     var control = document.getElementById("left-key-value");
@@ -131,6 +134,7 @@ function AddPlayer() {
     hideTableIfEmpty();
 }
 
+//This function resets all settings
 function resetForm() {
     inputField.value = "";
     getKeyLeft.hidden = false;
@@ -141,7 +145,8 @@ function resetForm() {
     htmlObject.innerHTML = "";
 }
 
-//This function displayes the current playerlist, also the color that has been assigned to the player and a delete-button
+//This function displayes the current playerlist, also the color that has been assigned to the player, the control-keys and a delete-button,
+//but if the player-table is empty it calls the "hideTableIfEmpty"-function to hide table
 function displayData() {
     var temp = document.getElementById("player-table");
     temp.hidden = false;
@@ -167,7 +172,7 @@ function displayData() {
     hideTableIfEmpty();
 }
 
-//This function deletes the selected gamer out of the playerlist. --> through push on the "delete"-button
+//This function deletes the selected gamer out of the playerlist. --> by klick on the "delete"-button
 function deleteElem(index) {
     var playersNew = [];
     var i = 1;
