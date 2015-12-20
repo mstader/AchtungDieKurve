@@ -6,6 +6,10 @@ if (dev) {
     var playersButton = document.getElementById("insert-players");
     playersButton.style.display = "block";
 }
+var btn = document.getElementById("start-game");
+btn.disabled = true;
+var btn2 = document.getElementById("start-game-2");
+btn2.disabled = true;
 
 //function for testing, inserts players into the playertable, so that there 
 function insertTestPlayers() {
@@ -131,6 +135,13 @@ function AddPlayer() {
         else
             alert("Player already exists! Please choose another name.");
     }
+    if (players.length <= 1) {
+        btn.disabled = true;
+        btn2.disabled = true;
+    } else {
+        btn.disabled = false;
+        btn2.disabled = false;
+    }
     hideTableIfEmpty();
 }
 
@@ -191,6 +202,13 @@ function deleteElem(index) {
     });
     document.getElementById("add-player").disabled = false;
     players = playersNew;
+    if (players.length <= 1) {
+        btn.disabled = true;
+        btn2.disabled = true;
+    } else {
+        btn.disabled = false;
+        btn2.disabled = false;
+    }
     displayData();
 }
 

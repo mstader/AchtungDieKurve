@@ -12,7 +12,7 @@ var game = {//settings for game
     canvas: null,
     context: null,
     holeSize: 20,
-    mximumChangeOfAngle: 10,
+    maximumChangeOfAngle: 3,
     disableButton() {//"Start-Game"-Button
         var btn = document.getElementById("start-game");
         btn.style.display = "none";
@@ -25,14 +25,13 @@ var game = {//settings for game
         }
     },
     startGameIntr() {//(event)listens for a control-key down, to initializes a direction change
-        console.log("game_intr");
         document.addEventListener("keydown", game.changeDirection);
+        document.addEventListener("keyup", game.controlRelease);
         changePage();
         game.playing = true;
         game.startAnimation();
     },
     startGame() {//starts the game: calles the animation function, which initializes the moving process of the line
-        console.log("game_start");
         game.playing = true;
         game.startAnimation();
     },
@@ -46,6 +45,21 @@ var game = {//settings for game
                     break;
                 } else if (player.keyRight == event.keyCode) {
                     player.turnRight = true;
+                    break;
+                }
+            }
+        }
+    },
+    controlRelease(event) {
+        if (game.playing) {
+            var player;
+            for (i = 0; i < players.length; i++) {
+                player = players[i];
+                if (player.keyLeft == event.keyCode) {
+                    player.turnLeft = false;
+                    break;
+                } else if (player.keyRight == event.keyCode) {
+                    player.turnRight = false;
                     break;
                 }
             }
@@ -70,7 +84,6 @@ var game = {//settings for game
         var background = game.context.getImageData(1, 1, 1, 1);
         for (i = 0; i <= imageData.data.length; i++) {
             if (background.data[i] != imageData.data[i]) {
-                console.log(player, newX, newY);
                 return true;
             }
         };
@@ -96,15 +109,12 @@ var game = {//settings for game
         var newX;
         var newY;
         var counter = 0;
-        console.log("animate start");
         players.forEach(function (player) {
             if (!player.finished) {
                 if (player.turnLeft) {
-                    player.angle += game.mximumChangeOfAngle;
-                    player.turnLeft = false;
+                    player.angle += game.maximumChangeOfAngle;
                 } else if (player.turnRight) {
-                    player.angle -= game.mximumChangeOfAngle;
-                    player.turnRight = false;
+                    player.angle -= game.maximumChangeOfAngle;
                 }
                 newX = (Math.cos(player.angle * Math.PI / 180) * game.speed / 100);
                 newY = (-Math.sin(player.angle * Math.PI / 180) * game.speed / 100);
@@ -120,7 +130,6 @@ var game = {//settings for game
                 }
             }
         });
-        console.log("animate middle");
         if (counter >= 2) {
             game.drawRectangleAnimation(context);
             // request new frame
@@ -141,6 +150,8 @@ var game = {//settings for game
                 player.lastX = Math.round((500 * Math.random()) + 100);
                 player.lastY = Math.round((200 * Math.random()) + 100);
                 player.angle = Math.round((360 * Math.random()));
+                player.turnLeft = false;
+                player.turnRight = false;
                 scoreAdd++;
             });
             displayData();
@@ -167,7 +178,6 @@ var game = {//settings for game
             };
         })();
         game.drawRectangleAnimation(game.context);//draws rectangle in the player-color on the canvas
-        console.log("start animation");
         // wait one second before starting animation
         setTimeout(function () {
             game.animate(game.canvas, game.context);
