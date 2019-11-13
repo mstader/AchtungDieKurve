@@ -8,4 +8,3 @@ The project was done during an HTML5 development course at FH Hagenberg - Mobile
 * Hosted at:
   * https://madmaxom.github.io/AchtungDieKurve/
   * http://zatacka.madchrome.bplaced.net
-  * http://zatacka.tk
