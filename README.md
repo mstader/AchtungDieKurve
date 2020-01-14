@@ -6,5 +6,5 @@ It is purely made with web technologies like HTML, CSS and JS. It is also made w
 The project was done during an HTML5 development course at FH Hagenberg - Mobile Computing.
 
 * Hosted at:
-  * https://madmaxom.github.io/AchtungDieKurve/
+  * https://mstader.github.io/AchtungDieKurve/
   * http://zatacka.madchrome.bplaced.net
